@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if title and page.url != "/" %}{{ title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.position }}{% endif %}</title>
+    <meta name="description" content="{{ description or site.description }}" />
+    <meta name="author" content="{{ site.title }}" />
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% if title and page.url != '/' %}{{ title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
+    <meta property="og:description" content="{{ description or site.description }}" />
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <script>
+      // Set the theme before first paint so there is no flash of the wrong palette.
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="wrapper">
+      <aside class="sidebar">
+        <div class="sidebar-inner">
+          <a href="/" class="avatar-link" aria-label="Home">
+            <img class="avatar" src="{{ site.avatar }}" alt="{{ site.title }}" width="400" height="400" />
+          </a>
+
+          <h1 class="site-name"><a href="/">{{ site.title }}</a></h1>
+          <p class="site-position">{{ site.position }}</p>
+          {# Each affiliation links separately; the separator sits outside the
+             anchors so it is not underlined on hover. #}
+          <p class="site-affiliation">
+            {%- for a in site.affiliations -%}
+              <a href="{{ a.url }}">{{ a.name }}</a>
+              {%- if not loop.last %} <span class="sep" aria-hidden="true">·</span> {% endif -%}
+            {%- endfor -%}
+          </p>
+          {# The address is too long for the narrow column at a legible size, so a
+             <wbr> after the @ gives it one clean break point instead of letting
+             it split mid-domain. The href itself is untouched. #}
+          <p class="site-email">
+            <a href="mailto:{{ site.email }}">{{ site.email | replace("@", "@<wbr>") | safe }}</a>
+          </p>
+
+          {% if site.currently %}
+            <p class="site-currently"><span class="dot" aria-hidden="true"></span>{{ site.currently }}</p>
+          {% endif %}
+
+          {% include "social.njk" %}
+
+          <div class="theme-switch" role="group" aria-label="Colour theme">
+            <button type="button" data-theme-set="auto" title="Match system" aria-label="Match system theme">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 2v14a7 7 0 0 1 0-14Z"/></svg>
+            </button>
+            <button type="button" data-theme-set="light" title="Light" aria-label="Light theme">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-13.5a1 1 0 0 1 1 1V6a1 1 0 1 1-2 0V4.5a1 1 0 0 1 1-1Zm0 15a1 1 0 0 1 1 1V21a1 1 0 1 1-2 0v-1.5a1 1 0 0 1 1-1ZM3.5 12a1 1 0 0 1 1-1H6a1 1 0 1 1 0 2H4.5a1 1 0 0 1-1-1Zm14.5 0a1 1 0 0 1 1-1h1.5a1 1 0 1 1 0 2H19a1 1 0 0 1-1-1ZM5.6 5.6a1 1 0 0 1 1.4 0l1.1 1.1a1 1 0 0 1-1.4 1.4L5.6 7a1 1 0 0 1 0-1.4Zm10.3 10.3a1 1 0 0 1 1.4 0l1.1 1.1a1 1 0 0 1-1.4 1.4l-1.1-1.1a1 1 0 0 1 0-1.4Zm2.5-10.3a1 1 0 0 1 0 1.4L17.3 8.1a1 1 0 1 1-1.4-1.4L17 5.6a1 1 0 0 1 1.4 0ZM8.1 15.9a1 1 0 0 1 0 1.4L7 18.4A1 1 0 0 1 5.6 17l1.1-1.1a1 1 0 0 1 1.4 0Z"/></svg>
+            </button>
+            <button type="button" data-theme-set="dark" title="Dark" aria-label="Dark theme">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="column">
+        <nav class="topnav" aria-label="Primary">
+          <ul class="nav-list">
+            {% for item in site.nav %}
+              <li>
+                <a href="{{ item.url }}"
+                  {% if page.url == item.url %}aria-current="page"{% endif %}>{{ item.text }}</a>
+              </li>
+            {% endfor %}
+            {# The CV is a file, not a page. Its path is read from site.cv so it
+               stays single-sourced with the sidebar icon. #}
+            {% if site.cv %}
+              <li>
+                <a href="{{ site.cv }}" target="_blank" rel="noopener">
+                  CV
+                  <svg class="nav-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3ZM5 5h5v2H6v11h11v-4h2v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg>
+                  <span class="visually-hidden">(PDF, opens in a new tab)</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+
+        <main id="main">
+          {% if title and page.url != "/" %}
+            <header class="page-head">
+              <h1>{{ title }}</h1>
+              {% if description %}<p class="page-lede">{{ description }}</p>{% endif %}
+            </header>
+          {% endif %}
+
+          {{ content | safe }}
+        </main>
+
+        <footer class="site-footer">
+          <p>
+            &copy; {{ site.title }}. Built with
+            <a href="https://www.11ty.dev">Eleventy</a>, hosted on GitHub Pages.
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <script src="/assets/js/site.js" defer></script>
+  </body>
+</html>

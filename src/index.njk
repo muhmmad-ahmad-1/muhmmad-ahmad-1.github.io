@@ -1,0 +1,29 @@
+---
+layout: base.njk
+title: Home
+---
+<div class="intro">
+
+<p>I am an ML Engineer on the AI Infrastructure team at <a href="https://10xengineers.ai">10xEngineers</a> and a Teaching Fellow at <a href="https://lums.edu.pk">LUMS</a>, where I completed my BS in Electrical Engineering, advised on my final year project by Dr. Muhammad Tahir.</p>
+
+<p>I care about efficient machine learning in the broad sense — quantization, model compression, and distributed training — and about what efficiency is actually for: language models that are private, fast, and cheap to run. Most of what a deployed model costs is paid in memory bandwidth and energy, and most of what it risks is paid in moving data off the device. I like working close to the software stack, where those costs are actually decided.</p>
+
+<p>I develop <a href="https://arxiv.org/abs/2505.07531"><strong>QuantX</strong></a>, a <strong>hardware-aware quantization</strong> framework for LLM and VLM inference. Quantization methods are usually designed against an idealised numeric abstraction and then handed to a stack that does not provide it: the formats and kernels that actually ship constrain what an algorithm is allowed to do, and a method tuned in the abstract rarely survives the translation intact. I work at that boundary — starting from what the stack implements and designing the algorithm to fit, rather than expecting the stack to accommodate it. Two manuscripts on this <strong>hardware–software co-design</strong> are in preparation.</p>
+
+<p>Earlier in my BS, my research was on <strong>federated learning</strong>. My thesis looked at sharpness-aware minimization under non-IID clients: each client perturbs against its own loss surface, so SAM ends up flattening the wrong objective. I studied perturbations aimed at global rather than local sharpness.</p>
+
+<p>Separately, in another project, I looked at replacing parameter averaging altogether. Averaging permutation-invariant networks is unsound when clients disagree, so we distilled functional behaviour instead — matching logits from client teachers into a rotating student that uses only its own local data.</p>
+
+<p>I am applying to PhD programs for <strong>Fall 2027</strong> in efficient machine learning and ML systems. Contact me at <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+
+</div>
+
+<h2 class="news-head">News</h2>
+
+<ul class="news-list">
+  {% for item in news %}
+    <li>
+      <span class="news-date">{{ item.date }}</span> — {{ item.body | markdownInline | safe }}
+    </li>
+  {% endfor %}
+</ul>

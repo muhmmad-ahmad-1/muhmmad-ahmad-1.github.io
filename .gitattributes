@@ -1,0 +1,12 @@
+# Normalise to LF in the repository regardless of what the working tree uses.
+# Without this, a Windows checkout reports every text file as modified.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
