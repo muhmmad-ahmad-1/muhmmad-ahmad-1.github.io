@@ -1,7 +1,7 @@
 name: Build and deploy
 
 # Both branch names are listed deliberately. A workflow that triggers only on
-# `main` while the repo sits on `master` fails silently — it deploys nothing and
+# `main` while the repo sits on `master` fails silently: it deploys nothing and
 # reports nothing. Listing both removes that failure mode entirely.
 on:
   push:

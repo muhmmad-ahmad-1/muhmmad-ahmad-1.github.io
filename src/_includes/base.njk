@@ -4,13 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% if title and page.url != "/" %}{{ title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.position }}{% endif %}</title>
-    <meta name="description" content="{{ description or site.description }}" />
+    {# Only a page that defines its own description gets one. There is no
+       site-wide fallback: a borrowed description is worse than none. #}
+    {% if description %}<meta name="description" content="{{ description }}" />{% endif %}
     <meta name="author" content="{{ site.title }}" />
     <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{% if title and page.url != '/' %}{{ title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
-    <meta property="og:description" content="{{ description or site.description }}" />
+    {% if description %}<meta property="og:description" content="{{ description }}" />{% endif %}
     <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
 
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />

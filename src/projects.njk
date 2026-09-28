@@ -1,0 +1,26 @@
+---
+layout: base.njk
+title: Projects
+---
+{% for p in projects %}
+  <article class="project" id="{{ p.id }}">
+    <h2 class="project-title">{{ p.title }}</h2>
+    <p class="project-context">{{ p.context | markdownInline | safe }}</p>
+
+    {# An entry carries either a verbatim abstract or paragraphs written for the
+       site, never both. #}
+    {% if p.abstract %}
+      <p class="project-abstract">{{ p.abstract }}</p>
+    {% else %}
+      {% for para in p.body %}
+        <p>{{ para | markdownInline | safe }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <div class="btn-row project-links">
+      {% for l in p.links %}
+        <a class="btn" href="{{ l.url }}"{% if "http" in l.url %} target="_blank" rel="noopener"{% endif %}>{{ l.label }}</a>
+      {% endfor %}
+    </div>
+  </article>
+{% endfor %}

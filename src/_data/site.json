@@ -6,8 +6,7 @@
     { "name": "LUMS", "url": "https://lums.edu.pk" }
   ],
   "email": "muhammad.ahmad18802@gmail.com",
-  "description": "Muhammad Ahmad — ML engineer working on hardware-aware quantization, low-precision numerics, and efficient inference for LLMs and vision–language models.",
-  "currently": "Applying to PhD programs for Fall 2027 in efficient ML and ML systems.",
+  "currently": "Applying to MS / PhD programs for Fall 2027 in efficient ML and ML systems.",
   "url": "https://muhmmad-ahmad-1.github.io",
   "avatar": "/assets/img/avatar.jpg",
   "cv": "/files/muhammad_ahmad_cv.pdf",
@@ -16,10 +15,11 @@
     "github": "https://github.com/muhmmad-ahmad-1",
     "linkedin": "https://www.linkedin.com/in/ahmad-m1882",
     "scholar": "https://scholar.google.com/citations?user=BCXv5NYAAAAJ",
-    "twitter": "https://x.com/muhammada182",
-    "arxiv": ""
+    "twitter": "https://x.com/muhammada182"
   },
   "nav": [
-    { "text": "Home", "url": "/" }
+    { "text": "Home", "url": "/" },
+    { "text": "Publications", "url": "/publications/" },
+    { "text": "Projects", "url": "/projects/" }
   ]
 }

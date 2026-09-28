@@ -1,5 +1,5 @@
 // Theme: "auto" (follow OS) is the default; "light"/"dark" override it and persist.
-// Every localStorage access is guarded — it throws outright in some privacy modes.
+// Every localStorage access is guarded: it throws outright in some privacy modes.
 (function () {
   var root = document.documentElement;
   var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-theme-set]"));

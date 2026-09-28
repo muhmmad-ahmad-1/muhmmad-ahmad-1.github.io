@@ -2,7 +2,7 @@
 // both work. Add an item by putting it at the top of this list.
 //
 // Two conventions: this list records what happened, not awards or honours (those
-// belong on the CV); and roles are named exactly — "Teaching Fellow for X", never
+// belong on the CV); and roles are named exactly: "Teaching Fellow for X", never
 // "teaching X".
 export default [
   {
@@ -27,6 +27,6 @@ export default [
   },
   {
     date: "Oct 2024",
-    body: "Presented my first paper — machine learning for soil moisture forecasting over an in-situ sensor network, at **IEEE HITE**."
+    body: "Presented my first paper, on machine learning for soil moisture forecasting over an in-situ sensor network, at **[IEEE HITE](https://ieeexplore.ieee.org/document/10777226/)**."
   }
 ];

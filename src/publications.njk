@@ -1,0 +1,43 @@
+---
+layout: base.njk
+title: Publications
+---
+<ul class="pub-list">
+  {% for pub in publications %}
+    <li class="pub" id="{{ pub.id }}">
+      <div class="pub-year">
+        <span>{{ pub.year }}</span>
+        {% if pub.status %}<span class="pub-status">{{ pub.status }}</span>{% endif %}
+      </div>
+
+      <div class="pub-body">
+        <h2 class="pub-title">{{ pub.title }}</h2>
+
+        <p class="pub-authors">
+          {%- for a in pub.authors -%}
+            {% if a == site.title %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif %}{% if not loop.last %}, {% endif %}
+          {%- endfor -%}
+        </p>
+
+        <p class="pub-venue">
+          {{ pub.venue }}{% if pub.affiliation %} · {{ pub.affiliation }}{% endif %}
+        </p>
+
+        {% if pub.links.length %}
+          <div class="btn-row pub-links">
+            {% for l in pub.links %}
+              <a class="btn" href="{{ l.url }}"{% if "http" in l.url %} target="_blank" rel="noopener"{% endif %}>{{ l.label }}</a>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if pub.abstract %}
+          <details class="abstract">
+            <summary>Abstract</summary>
+            <p>{{ pub.abstract }}</p>
+          </details>
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
+</ul>
